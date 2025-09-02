@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  CosmicCanvas
-//
-//  Created by Матвей Авдеев on 01.09.2025.
-//
 
 import UIKit
 
