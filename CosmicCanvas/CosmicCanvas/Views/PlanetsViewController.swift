@@ -208,8 +208,10 @@ class PlanetCell: UICollectionViewCell {
         planetView.backgroundColor = .clear
         
         let iconView = UIImageView()
-        iconView.image = UIImage(systemName: planet.sfSymbol)
-        iconView.tintColor = planet.color
+        let imageName = planet.name.replacingOccurrences(of: "'s", with: "s")
+        if let image = UIImage(named: imageName) {
+            iconView.image = image.withRenderingMode(.alwaysOriginal)
+        }
         iconView.contentMode = .scaleAspectFit
         planetView.addSubview(iconView)
         iconView.translatesAutoresizingMaskIntoConstraints = false

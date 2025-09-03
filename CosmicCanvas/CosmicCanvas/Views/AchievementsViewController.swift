@@ -17,13 +17,22 @@ class AchievementsViewController: UIViewController {
     private let progressCircle = CircularProgressView()
     private let completionLabel = UILabel()
     
-    private var achievements: [Achievement] = [
+    private var achievements: [Achievement] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadAchievements()
+        updateProgress()
+    }
+    
+    private func loadAchievements() {
+        achievements = [
         Achievement(
             id: "first_quiz",
             title: "First Steps",
             description: "Complete your first quiz",
             emoji: "🚀",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_first_quiz"),
             color: UIColor(red: 0.3, green: 0.7, blue: 0.9, alpha: 1.0)
         ),
         Achievement(
@@ -31,7 +40,7 @@ class AchievementsViewController: UIViewController {
             title: "Planets Master",
             description: "Complete all planet quizzes",
             emoji: "🪐",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_planets_master"),
             color: UIColor(red: 0.6, green: 0.4, blue: 1.0, alpha: 1.0)
         ),
         Achievement(
@@ -39,7 +48,7 @@ class AchievementsViewController: UIViewController {
             title: "Sun Expert",
             description: "Master our star's secrets",
             emoji: "☀️",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_sun_expert"),
             color: UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0)
         ),
         Achievement(
@@ -47,7 +56,7 @@ class AchievementsViewController: UIViewController {
             title: "Dwarf Planet Specialist",
             description: "Learn about dwarf planets",
             emoji: "🌑",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_dwarf_specialist"),
             color: UIColor(red: 0.7, green: 0.5, blue: 0.8, alpha: 1.0)
         ),
         Achievement(
@@ -55,7 +64,7 @@ class AchievementsViewController: UIViewController {
             title: "Asteroid Hunter",
             description: "Explore rocky space objects",
             emoji: "🪨",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_asteroid_hunter"),
             color: UIColor(red: 0.6, green: 0.5, blue: 0.4, alpha: 1.0)
         ),
         Achievement(
@@ -63,7 +72,7 @@ class AchievementsViewController: UIViewController {
             title: "Comet Chaser",
             description: "Track icy space visitors",
             emoji: "☄️",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_comet_chaser"),
             color: UIColor(red: 0.8, green: 0.9, blue: 1.0, alpha: 1.0)
         ),
         Achievement(
@@ -71,7 +80,7 @@ class AchievementsViewController: UIViewController {
             title: "Inner System Explorer",
             description: "Master Mercury, Venus, Earth, Mars",
             emoji: "🔥",
-            isUnlocked: true,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_inner_planets"),
             color: UIColor(red: 0.9, green: 0.4, blue: 0.2, alpha: 1.0)
         ),
         Achievement(
@@ -79,7 +88,7 @@ class AchievementsViewController: UIViewController {
             title: "Outer System Expert",
             description: "Conquer Jupiter, Saturn, Uranus, Neptune",
             emoji: "❄️",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_outer_planets"),
             color: UIColor(red: 0.2, green: 0.6, blue: 0.9, alpha: 1.0)
         ),
         Achievement(
@@ -87,7 +96,7 @@ class AchievementsViewController: UIViewController {
             title: "Moon Master",
             description: "Learn about planetary moons",
             emoji: "🌙",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_moon_master"),
             color: UIColor(red: 0.8, green: 0.8, blue: 0.9, alpha: 1.0)
         ),
         Achievement(
@@ -95,7 +104,7 @@ class AchievementsViewController: UIViewController {
             title: "Temperature Expert",
             description: "Master planetary temperatures",
             emoji: "🌡️",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_temperature_expert"),
             color: UIColor(red: 0.9, green: 0.3, blue: 0.3, alpha: 1.0)
         ),
         Achievement(
@@ -103,7 +112,7 @@ class AchievementsViewController: UIViewController {
             title: "Distance Scholar",
             description: "Know all orbital distances",
             emoji: "📏",
-            isUnlocked: true,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_distance_scholar"),
             color: UIColor(red: 0.3, green: 0.8, blue: 0.5, alpha: 1.0)
         ),
         Achievement(
@@ -111,15 +120,18 @@ class AchievementsViewController: UIViewController {
             title: "Solar System Master",
             description: "Complete all categories",
             emoji: "🌌",
-            isUnlocked: false,
+            isUnlocked: UserDefaults.standard.bool(forKey: "achievement_solar_system_master"),
             color: UIColor(red: 0.9, green: 0.8, blue: 0.2, alpha: 1.0)
         )
-    ]
+        ]
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        loadAchievements()
         updateProgress()
     }
     

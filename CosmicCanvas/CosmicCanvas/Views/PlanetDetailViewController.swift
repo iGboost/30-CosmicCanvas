@@ -81,15 +81,7 @@ class PlanetDetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false 
         }
         
-        let planetSize: CGFloat = {
-            if planet.id == "sun" {
-                return 250
-            } else if planet.size > 5 {
-                return 200
-            } else {
-                return max(150, 200 * planet.size)
-            }
-        }()
+        let planetSize: CGFloat = 200
         
         NSLayoutConstraint.activate([
             starfield.topAnchor.constraint(equalTo: view.topAnchor),
@@ -141,8 +133,10 @@ class PlanetDetailViewController: UIViewController {
         emojiLabel.text = ""
         
         let iconView = UIImageView()
-        iconView.image = UIImage(systemName: planet.sfSymbol)
-        iconView.tintColor = planet.color
+        let imageName = planet.name.replacingOccurrences(of: "'s", with: "s")
+        if let image = UIImage(named: imageName) {
+            iconView.image = image.withRenderingMode(.alwaysOriginal)
+        }
         iconView.contentMode = .scaleAspectFit
         planetView.addSubview(iconView)
         iconView.translatesAutoresizingMaskIntoConstraints = false

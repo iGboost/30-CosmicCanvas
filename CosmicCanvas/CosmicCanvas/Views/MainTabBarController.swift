@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController {
             selectedImage: UIImage(systemName: "globe.fill")
         )
         
-        let quiz = QuizViewController()
+        let quiz = QuizCategoryViewController()
         let quizNav = UINavigationController(rootViewController: quiz)
         quizNav.tabBarItem = UITabBarItem(
             title: "Quiz",
